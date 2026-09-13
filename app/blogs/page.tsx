@@ -5,7 +5,7 @@ import Form from 'next/form';
 
 const Blogs = async ({searchParams}: { searchParams: Promise<{ filter?: string }> }) => {
     const {filter} = await searchParams
-    const blogs = getBlogs()
+    const blogs = await getBlogs()
     const filterText = filter?.toLowerCase() ?? "";
 
     const searchedBlogs = blogs.filter((blog) =>
