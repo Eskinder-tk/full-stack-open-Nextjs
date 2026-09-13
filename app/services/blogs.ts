@@ -14,7 +14,13 @@ export const getBlogById = (id: number) => {
 }
 
 export const addBlog = async (title: string, author: string, url: string) => {
-    await db.insert(blogs).values({title, author, url})
+
+    const user = await db.query.users.findFirst({
+    orderBy: sql`RANDOM()`,
+  })
+  if (user) {
+    await db.insert(blogs).values({title, author, url, userId: user.id})
+  }
 }
 
 export const handleLike = async (id: number) => {
